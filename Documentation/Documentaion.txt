@@ -1,0 +1,149 @@
+1. Connect Mysql with PowerBI
+
+2. Load the data
+
+3. STAR schema
+
+4. ETL (Extract TRansformation Load)
+
+   Tranform Data -> Power Query Editor
+
+	4.1 Remove blank space from column zone in markets table
+	4.2 Remove -1 and 0 from sales_amount in transaction table
+	4.2 Normalize USD currency to INR
+		Add column -> condition column -> give a name to the new custom column 
+		first condition => if value is in 'USD' then 1 else null, hit enter
+		now change the formula like if 'USD' then [sales_amount]*75 else [sales_amount] 
+	4.3 go to home and click 'close and apply'
+	4.4 Removed duplicated currency like ('USD' and 'USD ') or ('INR' and 'INR ')
+
+
+5. Building the Dashboard 
+
+	5.1 Enter data -> create column named BaseMeasures which is used to contain the base or basic insight 	    such as Revenue, Sales Qty
+
+	5.2 Click the three dot on the BaseMeasures Field then select 'New Column' name it Revenue like
+		Revenue = SUM(sales.transactions[sales_amount])
+
+	5.3 Now add Sales Qty column with Sales Qty = SUM(sales.transactions[sales_qty])
+
+
+6. Add Revenue and Sales Qty to Dashboard
+	
+	6.1 Drag the Revenue field and Drop it into dashboard area. By default it will a bar plot change it into card visual
+	
+	6.2 Add Sales Qty to Dashboard now like Revenue field. If you want to edit the background or text anything go to format and change it
+
+
+7. Add Revenue by Customer
+	
+	7.1 copy & paste the revenue into the dashboard again and change the visual to stacked bar chart.
+	
+	7.2 Drag the customer_name and drop it into the y-axis, revenue to x-axis and make the size bigger adjust it to the rest 		rest of the page
+
+	7.3 Format the chart 
+		7.3.1 Trun off the both x-axis & y-aixs title
+		7.3.2 Trun off the entire x-axis to remove the small element in the bottom of the chart (scroll down to see it)
+		7.3.2 Add the Data label to get to know the revenue from each customer. It shows in billion, so move to values section and change the display units from auto or whatever to millions
+
+	7.4 Change the title by moving to the Format -> General -> Title section and alter it to Revenue by Customers
+
+
+8. Add Sales Qty by customer 
+
+	8.1 Do the same you did in the step 7
+
+	8.2 Change the revenue field with  Sales Qty field from Basemeasure 
+
+	8.3 Change the title by moving to the Format -> General -> Title section and alter it to Sales Qty by Customers
+
+
+9. Add Year
+	
+	9.1 Drag and drop the year field and change the visual to slicer
+
+	9.2 Change the visual representation by moving to Format -> Slicer Setting -> Options -> Style -> change it to title style
+
+	9.3 Adjust it to fit like a row
+
+
+10. Add Months
+
+	10.1 copy & and paste the year chart first and change the year field with cy_date from sale_date
+
+	10.2 But the month is not in a clear format
+
+	10.3 So go to the Data View in PowerBi and select the sales_date and select the cy_date field, format this to 'mmm yy'
+		 which represents 'Jan 20' mmm -> Jan yy -> 20 if 'mm yy' -> 'Ja 20'
+
+
+11. Change the Revenue by Customers to Revenue by Cities
+	
+	11.1 Replace the customer_name field with market_name field 
+
+	11.2 Also change the title respectively
+
+
+12. Also change the Sales Qty by Customers to Sales Qty by Cities
+
+	12.1 Do the same you did in step 11
+
+
+13. Top 5 Customers
+
+	13.1 copy & paste Sales Qty by Cities then change the y-axis to customer_name and x-axis to revenue
+
+	13.2 Click the customer_name in filter section which is in left to the visualizations
+
+	13.3 From the dropdown menu select Top N in filter type, set Top items to 5 and add Revenue to By value
+
+	13.4 Finally click the Apply filter to update the fiters result
+
+	13.5 If the customer names are not fully visible then adjust the max area width of y-axis in Format section
+	
+	13.6 Change the title
+
+
+14. Top 5 Products 
+
+	14.1 Do all the thing you done in the step 13 add products_code to the y-axis
+
+
+15. Revenue Trend
+
+	15.1 Drag the Revenue field and drop it into the dashboard and change the visual style to line chart
+
+	15.2 Add Revenue to y-axis and cy_date to x-axis
+
+	15.3 Remove the titles of x and y axis
+
+	15.4 Change the color of the line to Red
+
+
+16. Creating the mobile view
+
+	16.1 Go to view -> Mobile View
+	
+	16.2 Add only Year chart and place it in the top to fill the total width completely
+	
+	16.3 Place the Revenue Trend just below the Year chart
+
+	16.4 Add the Top 5 Customers & Top 5 Product at last as side by side
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
